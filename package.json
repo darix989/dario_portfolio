@@ -2,7 +2,7 @@
   "name": "dario_portfolio",
   "version": "0.1.0",
   "private": true,
-  "home": "https://darix989.github.io/dario_portfolio",
+  "homepage": "https://darix989.github.io/dario_portfolio",
   "dependencies": {
     "@carbon/icons-react": "^10.8.2",
     "@carbon/themes": "^10.9.3",
