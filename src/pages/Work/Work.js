@@ -1,16 +1,18 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import { SectionTitle, Paragraph, PortfolioSlotItem } from '../../styles';
+import { SectionTitle, Paragraph, PortfolioSequencedSlideWrap, PortfolioGrowWrap } from '../../styles';
 import { WorkItem, WorkTitle, JobTitle } from './styles';
 
 const Work = ({ user }) => {
   return (
     <Layout user={user}>
       <div>
-        <SectionTitle>Work</SectionTitle>
+        <PortfolioGrowWrap>
+          <SectionTitle>Work</SectionTitle>
+        </PortfolioGrowWrap>
         <ul>
           {user.work.map((work, i) => (
-            <PortfolioSlotItem index={i}>
+            <PortfolioSequencedSlideWrap index={i}>
               <WorkItem key={i}>
                 <WorkTitle>{work.position}</WorkTitle>
                 <div>
@@ -22,7 +24,7 @@ const Work = ({ user }) => {
                 </div>
                 <Paragraph>{work.summary}</Paragraph>
               </WorkItem>
-            </PortfolioSlotItem>
+            </PortfolioSequencedSlideWrap>
           ))}
         </ul>
       </div>

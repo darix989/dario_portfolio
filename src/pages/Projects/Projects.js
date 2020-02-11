@@ -1,19 +1,19 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import { SectionTitle, Pill, PortfolioSlotItem } from '../../styles';
+import { SectionTitle, Pill, PortfolioSequencedSlideWrap, PortfolioGrowWrap } from '../../styles';
 import { ProjectItem, ProjectTitle, SkillContainer } from './styles';
-// import Slide from '@material-ui/core/Slide';
 
 const Projects = ({ user }) => {
-  // const [checked, setChecked] = React.useState(false);
 
   return (
         <Layout user={user}>
           <div>
-            <SectionTitle>Projects</SectionTitle>
+            <PortfolioGrowWrap>
+              <SectionTitle>Projects</SectionTitle>
+            </PortfolioGrowWrap>
             <ul>
               {user.projects.map((project, i) => (
-                <PortfolioSlotItem index={i}>
+                <PortfolioSequencedSlideWrap index={i}>
                     <ProjectItem key={i}>
                       <ProjectTitle>{project.name}</ProjectTitle>
                       <p>{project.summary}</p>
@@ -23,7 +23,7 @@ const Projects = ({ user }) => {
                         ))}
                       </SkillContainer>
                     </ProjectItem>
-                </PortfolioSlotItem>
+                </PortfolioSequencedSlideWrap>
               ))}
             </ul>
           </div>

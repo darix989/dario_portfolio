@@ -1,37 +1,46 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import { SectionTitle, Paragraph, Pill, PortfolioSlotItem } from '../../styles';
+import { SectionTitle, Paragraph, Pill, PortfolioSequencedSlideWrap, PortfolioGrowWrap } from '../../styles';
 import { ProfileLink } from './styles';
+
 
 const Me = ({ user }) => {
   return (
     <Layout user={user}>
       <div>
-        <SectionTitle>About Me</SectionTitle>
-        <Paragraph>{user.basics.summary}</Paragraph>
+        <PortfolioGrowWrap >
+          <SectionTitle>About Me</SectionTitle>
+        </PortfolioGrowWrap>
+        <PortfolioSequencedSlideWrap index={1}>
+          <Paragraph>{user.basics.summary}</Paragraph>
+        </PortfolioSequencedSlideWrap>
       </div>
       <div>
-        <SectionTitle>Skills</SectionTitle>
+        <PortfolioGrowWrap >
+          <SectionTitle>Skills</SectionTitle>
+        </PortfolioGrowWrap>
         <div>
           {user.skills.map( (skill, i) => (
-            <PortfolioSlotItem index={i}>
+            <PortfolioSequencedSlideWrap index={i}>
               <Pill key={skill.name}>{skill.name}</Pill>
-            </PortfolioSlotItem>
+            </PortfolioSequencedSlideWrap>
           ))}
         </div>
       </div>
       <div>
+      <PortfolioGrowWrap >
         <SectionTitle>Profiles</SectionTitle>
-        <ul>
-          {user.basics.profiles.map((profile, i) => (
-            <ProfileLink key={profile.network}>
-              {i !== 0 && ' | '}
-              <a href={profile.url} target="_blank" rel="noreferrer noopener">
-                {profile.network}
-              </a>
-            </ProfileLink>
-          ))}
-        </ul>
+          <ul>
+            {user.basics.profiles.map((profile, i) => (
+              <ProfileLink key={profile.network}>
+                {i !== 0 && ' | '}
+                <a href={profile.url} target="_blank" rel="noreferrer noopener">
+                  {profile.network}
+                </a>
+              </ProfileLink>
+            ))}
+          </ul>
+        </PortfolioGrowWrap>
       </div>
     </Layout>
   );

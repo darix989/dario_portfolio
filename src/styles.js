@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { blue } from '@carbon/colors';
 import Slide from '@material-ui/core/Slide';
+import Grow from '@material-ui/core/Grow';
 import React from 'react';
 
 export const SectionTitle = styled.h3`
@@ -24,7 +25,15 @@ export const Pill = styled.span`
   font-weight: bold;
 `;
 
-export function PortfolioSlotItem(props) {
+export function PortfolioGrowWrap(props) {
+  return (
+    <Grow in={true} timeout={{enter: 1000}} >
+      <div> {props.children} </div>
+    </Grow>
+  );
+}
+
+export function PortfolioSequencedSlideWrap(props) {
   return (
     <Slide direction="up" in={true} mountOnEnter unmountOnExit timeout={{enter: (props.index+1)*500}}>
       <div> {props.children} </div>
