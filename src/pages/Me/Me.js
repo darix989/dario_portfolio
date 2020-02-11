@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import { SectionTitle, Paragraph, Pill } from '../../styles';
+import { SectionTitle, Paragraph, Pill, PortfolioSlotItem } from '../../styles';
 import { ProfileLink } from './styles';
 
 const Me = ({ user }) => {
@@ -13,8 +13,10 @@ const Me = ({ user }) => {
       <div>
         <SectionTitle>Skills</SectionTitle>
         <div>
-          {user.skills.map(skill => (
-            <Pill key={skill.name}>{skill.name}</Pill>
+          {user.skills.map( (skill, i) => (
+            <PortfolioSlotItem index={i}>
+              <Pill key={skill.name}>{skill.name}</Pill>
+            </PortfolioSlotItem>
           ))}
         </div>
       </div>

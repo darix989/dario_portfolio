@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { blue } from '@carbon/colors';
+import Slide from '@material-ui/core/Slide';
+import React from 'react';
 
 export const SectionTitle = styled.h3`
   margin-top: 1.5rem;
@@ -21,3 +23,11 @@ export const Pill = styled.span`
   border-radius: 2px;
   font-weight: bold;
 `;
+
+export function PortfolioSlotItem(props) {
+  return (
+    <Slide direction="up" in={true} mountOnEnter unmountOnExit timeout={{enter: (props.index+1)*500}}>
+      <div> {props.children} </div>
+    </Slide>
+  );
+}

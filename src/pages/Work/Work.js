@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import { SectionTitle, Paragraph } from '../../styles';
+import { SectionTitle, Paragraph, PortfolioSlotItem } from '../../styles';
 import { WorkItem, WorkTitle, JobTitle } from './styles';
 
 const Work = ({ user }) => {
@@ -10,17 +10,19 @@ const Work = ({ user }) => {
         <SectionTitle>Work</SectionTitle>
         <ul>
           {user.work.map((work, i) => (
-            <WorkItem key={i}>
-              <WorkTitle>{work.position}</WorkTitle>
-              <div>
-                <JobTitle>{work.company}</JobTitle> <span>{work.location}</span>
-                <span> &sdot; </span>
-                <span>
-                  {work.start.year} to {work.end.year}
-                </span>
-              </div>
-              <Paragraph>{work.summary}</Paragraph>
-            </WorkItem>
+            <PortfolioSlotItem index={i}>
+              <WorkItem key={i}>
+                <WorkTitle>{work.position}</WorkTitle>
+                <div>
+                  <JobTitle>{work.company}</JobTitle> <span>{work.location}</span>
+                  <span> &sdot; </span>
+                  <span>
+                    {work.start.year} to {work.end.year}
+                  </span>
+                </div>
+                <Paragraph>{work.summary}</Paragraph>
+              </WorkItem>
+            </PortfolioSlotItem>
           ))}
         </ul>
       </div>
