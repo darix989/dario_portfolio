@@ -1,15 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { ArrowRight16 } from '@carbon/icons-react';
-
 import { HeaderContainer, Header, Image, ViewResumeLink } from './styles';
-import { PortfolioGrowWrap } from '../../styles';
 
 const UserHeader = ({ user }) => {
   const location = useLocation();
 
   return (
-    <PortfolioGrowWrap>
       <HeaderContainer isHome={location.pathname === '/'}>
         <Header>
           <Image src={user.basics.picture} />
@@ -47,7 +44,6 @@ const UserHeader = ({ user }) => {
           </ViewResumeLink>
         </div>
       </HeaderContainer>
-    </PortfolioGrowWrap>
   );
 };
 

@@ -4,8 +4,9 @@ import Me from './Me';
 import Projects from './Projects';
 import Work from './Work';
 import Education from './Education';
+import Hobbies from './Hobbies';
 
-const Pages = ({ user }) => {
+const Pages = ({ user, hobbies }) => {
   return (
     <Router basename="/dario_portfolio">
       <Switch>
@@ -20,6 +21,9 @@ const Pages = ({ user }) => {
         </Route>
         <Route path="/education">
           <Education user={user} />
+        </Route>
+        <Route path="/hobbies">
+          <Hobbies user={user} hobbies={hobbies}/>
         </Route>
       </Switch>
     </Router>
