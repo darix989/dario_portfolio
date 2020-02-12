@@ -5,6 +5,7 @@ import Projects from './Projects';
 import Work from './Work';
 import Education from './Education';
 import Hobbies from './Hobbies';
+import Timeline from './Timeline';
 
 const Pages = (props) => {
   return (
@@ -24,6 +25,9 @@ const Pages = (props) => {
         </Route>
         <Route path="/hobbies">
           <Hobbies {...props}/>
+        </Route>
+        <Route path="/timeline">
+          <Timeline {...props}/>
         </Route>
       </Switch>
     </Router>
