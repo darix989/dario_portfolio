@@ -19,10 +19,13 @@ const hobbiesDrawings = [
   'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f49c7b90-64db-4ebd-af85-5ac876c901d2/d1xu8hz-7da63628-b392-44ce-bebb-7e29a8052073.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y0OWM3YjkwLTY0ZGItNGViZC1hZjg1LTVhYzg3NmM5MDFkMlwvZDF4dThoei03ZGE2MzYyOC1iMzkyLTQ0Y2UtYmViYi03ZTI5YTgwNTIwNzMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ilBi9NWJ-tFPvA66mowHcgG2tnPsK4LImhSfueMnuaU'
 ]
 
+const hobbyIntro = 'When I was a child I had always liked to create experiences for other people. One of my first hobby was drawing fan made comics inspired by Japanese manga. I also enjoyed creating cardboard games about those, something not very distant from Pokemon cards or Monopoly, but Dragon Ball style. '
+
 function App() {
   const [user, setUser] = useState(null);
 
   const hobbies = {
+    intro: hobbyIntro,
     drawings: hobbiesDrawings
 
   }

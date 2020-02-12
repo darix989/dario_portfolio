@@ -13,20 +13,20 @@ const Hobbies = ({ user, hobbies }) => {
                 <SectionTitle>Hobbies</SectionTitle>
             </PortfolioGrowWrap>
             <PortfolioSequencedSlideWrap index={1}>
-                <Paragraph>{'akjs dkjasb kjdaskjas ddasdkjas adkjasbakd ajkbsdk abdsha adkbaksljashndj jasdnjkasnjd jasndkjas ajsa ajnsas asj asdas  djljal.'}</Paragraph>
+                <Paragraph>{hobbies.intro}</Paragraph>
             </PortfolioSequencedSlideWrap>
         </div>
         <div>
             <PortfolioGrowWrap >
                 <SectionTitle>Drawings</SectionTitle>
             </PortfolioGrowWrap>
-            <div>
+            <PortfolioSequencedSlideWrap index={1}>
                 <AwesomeSlider>
                     {hobbies.drawings.map( (drawLink, i) => (
                         <div key={i} data-src={drawLink}></div>
                     ))}
                 </AwesomeSlider>
-            </div>
+            </PortfolioSequencedSlideWrap>
         </div>
 
         </Layout>
