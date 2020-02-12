@@ -3,18 +3,21 @@ import Layout from '../../components/Layout';
 import { SectionTitle, Pill, PortfolioSequencedSlideWrap, PortfolioGrowWrap } from '../../styles';
 import { ProjectItem, ProjectTitle, SkillContainer } from './styles';
 
-const Projects = ({ user }) => {
+const Projects = (props) => {
+  const user = props.user;
+  // const hobbies = props.hobbies;
+  const init = props.init;
 
   return (
-        <Layout user={user}>
+    <Layout user={user} init={init}>
           <div>
             <PortfolioGrowWrap>
               <SectionTitle>Projects</SectionTitle>
             </PortfolioGrowWrap>
             <ul>
               {user.projects.map((project, i) => (
-                <PortfolioSequencedSlideWrap index={i}>
-                    <ProjectItem key={i}>
+                <PortfolioSequencedSlideWrap index={i} key={i}>
+                    <ProjectItem >
                       <ProjectTitle>{project.name}</ProjectTitle>
                       <p>{project.summary}</p>
                       <SkillContainer>

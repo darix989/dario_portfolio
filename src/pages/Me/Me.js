@@ -4,9 +4,13 @@ import { SectionTitle, Paragraph, Pill, PortfolioSequencedSlideWrap, PortfolioGr
 import { ProfileLink } from './styles';
 
 
-const Me = ({ user }) => {
+const Me = (props) => {
+  const user = props.user;
+  // const hobbies = props.hobbies;
+  const init = props.init;
+
   return (
-    <Layout user={user}>
+    <Layout user={user} init={init}>
       <div>
         <PortfolioGrowWrap >
           <SectionTitle>About Me</SectionTitle>
@@ -21,8 +25,8 @@ const Me = ({ user }) => {
         </PortfolioGrowWrap>
         <div>
           {user.skills.map( (skill, i) => (
-            <PortfolioSequencedSlideWrap index={i}>
-              <Pill key={skill.name}>{skill.name}</Pill>
+            <PortfolioSequencedSlideWrap index={i} key={skill.name}>
+              <Pill>{skill.name}</Pill>
             </PortfolioSequencedSlideWrap>
           ))}
         </div>

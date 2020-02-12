@@ -6,24 +6,24 @@ import Work from './Work';
 import Education from './Education';
 import Hobbies from './Hobbies';
 
-const Pages = ({ user, hobbies }) => {
+const Pages = (props) => {
   return (
     <Router basename="/dario_portfolio">
       <Switch>
         <Route exact path="/">
-          <Me user={user} />
+          <Me {...props} />
         </Route>
         <Route path="/projects">
-          <Projects user={user} />
+          <Projects {...props}/>
         </Route>
         <Route path="/work">
-          <Work user={user} />
+          <Work {...props} />
         </Route>
         <Route path="/education">
-          <Education user={user} />
+          <Education {...props} />
         </Route>
         <Route path="/hobbies">
-          <Hobbies user={user} hobbies={hobbies}/>
+          <Hobbies {...props}/>
         </Route>
       </Switch>
     </Router>

@@ -4,17 +4,20 @@ import Layout from '../../components/Layout';
 import { SectionTitle, Paragraph, PortfolioSequencedSlideWrap, PortfolioGrowWrap } from '../../styles';
 import { EducationItem, Institution, Degree } from './styles';
 
-const Education = ({ user }) => {
+const Education = (props) => {
+  const user = props.user;
+  const init = props.init;
+
   return (
-    <Layout user={user}>
+    <Layout user={user} init={init}>
       <div>
         <PortfolioGrowWrap>
           <SectionTitle>Education</SectionTitle>
         </PortfolioGrowWrap>
         <ul>
           {user.education.map((education, i) => (
-            <PortfolioSequencedSlideWrap index={i}>
-              <EducationItem key={i}>
+            <PortfolioSequencedSlideWrap index={i} key={i}>
+              <EducationItem>
                 <Institution>{education.position}</Institution>
                 <div>
                   <Degree>

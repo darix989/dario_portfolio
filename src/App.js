@@ -23,6 +23,7 @@ const hobbyIntro = 'When I was a child I had always liked to create experiences 
 
 function App() {
   const [user, setUser] = useState(null);
+  const [init, setInit] = useState(false);
 
   const hobbies = {
     intro: hobbyIntro,
@@ -36,6 +37,10 @@ function App() {
       .then(res => res.json())
       .then(user => {
         setUser(user);
+        setTimeout(() => {
+          // used for doing one shot animation of the UserHeader
+          setInit(true);
+        }, 1000);
       });
   }, []);
 
@@ -43,7 +48,7 @@ function App() {
     return <LoadingPage/>;
   }
 
-  return <Pages user={user} hobbies={hobbies} />;
+  return <Pages user={user} hobbies={hobbies} init={init} />;
 }
 
 export default App;

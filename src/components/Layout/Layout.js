@@ -5,13 +5,13 @@ import MobileNav from '../MobileNav';
 
 import { StyledContent } from './styles';
 
-const Layout = ({ user, children }) => {
+const Layout = ({ user, init, children }) => {
   return (
     <>
       <MobileNav />
       <Sidebar />
       <StyledContent>
-        <UserHeader user={user} />
+        <UserHeader user={user} init={init}/>
         <div>{children}</div>
       </StyledContent>
     </>

@@ -4,10 +4,13 @@ import { SectionTitle, Paragraph, PortfolioSequencedSlideWrap, PortfolioGrowWrap
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 
-const Hobbies = ({ user, hobbies }) => {
-
+const Hobbies = (props) => {
+    const user = props.user;
+    const hobbies = props.hobbies;
+    const init = props.init;
+  
     return (
-        <Layout user={user}>
+      <Layout user={user} init={init}>
         <div>
             <PortfolioGrowWrap >
                 <SectionTitle>Hobbies</SectionTitle>
