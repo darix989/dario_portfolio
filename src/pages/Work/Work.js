@@ -17,6 +17,7 @@ const Work = (props) => {
         <ul>
           {user.work.map((work, i) => (
             <PortfolioSequencedSlideWrap index={i} key={i}>
+              <a href={work.website} target={'_blank'}>
               <WorkItem >
                 <WorkTitle>{work.position}</WorkTitle>
                 <div>
@@ -28,6 +29,7 @@ const Work = (props) => {
                 </div>
                 <Paragraph>{work.summary}</Paragraph>
               </WorkItem>
+              </a>
             </PortfolioSequencedSlideWrap>
           ))}
         </ul>
