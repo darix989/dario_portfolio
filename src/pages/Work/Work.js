@@ -17,7 +17,7 @@ const Work = (props) => {
         <ul>
           {user.work.map((work, i) => (
             <PortfolioSequencedSlideWrap index={i} key={i}>
-              <a href={work.website} target={'_blank'}>
+              <a href={work.website} target={'_blank'} style={{textDecoration: 'none'}}>
               <WorkItem >
                 <WorkTitle>{work.position}</WorkTitle>
                 <div>

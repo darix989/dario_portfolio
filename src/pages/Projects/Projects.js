@@ -17,7 +17,7 @@ const Projects = (props) => {
             <ul>
               {user.projects.map((project, i) => (
                 <PortfolioSequencedSlideWrap index={i} key={i}>
-                  <a href={project.website} target={'_blank'}>
+                  <a href={project.website} target={'_blank'} style={{textDecoration: 'none'}}>
                     <ProjectItem >
                       <ProjectTitle>{project.displayName}</ProjectTitle>
                       <p>{project.summary}</p>

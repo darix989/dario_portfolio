@@ -28,7 +28,7 @@ const UserHeader = ({ user, init }) => {
             <p>{user.basics.headline}</p>
             <p>
               Blog:{' '}
-              <a href={user.basics.blog} target="_blank" rel="noreferrer noopener">
+              <a href={user.basics.blog} target="_blank" rel="noreferrer noopener" style={{textDecoration: 'none'}}>
                 {user.basics.blog}
               </a>
             </p>
