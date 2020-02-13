@@ -10,7 +10,9 @@ const UserHeader = ({ user, init }) => {
   const content = (
       <HeaderContainer isHome={location.pathname === '/'}>
         <Header>
+          <div>
           <Image src={user.basics.picture} />
+          </div>
           <div>
             <h2>{user.basics.name}</h2>
             <h4>
