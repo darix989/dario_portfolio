@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Pages from './pages';
+import Canvas from './Canvas';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 function LoadingPage() {
@@ -48,7 +49,12 @@ function App() {
     return <LoadingPage/>;
   }
 
-  return <Pages user={user} hobbies={hobbies} init={init} />;
+  return (
+    <div> 
+      {/* <Canvas /> */}
+      <Pages user={user} hobbies={hobbies} init={init} />
+    </div>
+  );
 }
 
 export default App;
