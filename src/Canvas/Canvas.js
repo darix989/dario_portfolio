@@ -1,9 +1,11 @@
 import React from 'react';
 
 function Canvas (props) {
-    let canvas = React.createRef();
+    const canvas = React.useRef(null)
 
     // let ctx = refs.canvas.getContext('2d');
+
+
 
     return (
         <div id="overlay"
