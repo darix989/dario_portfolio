@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { ArrowRight16 } from '@carbon/icons-react';
 import { HeaderContainer, Header, Image, ViewResumeLink } from './styles';
-import { PortfolioGrowWrap } from '../../styles';
+import { PortfolioGrowWrap, ElementBeforeCanvas } from '../../styles';
 
 const UserHeader = ({ user, init }) => {
   const location = useLocation();
@@ -10,9 +10,9 @@ const UserHeader = ({ user, init }) => {
   const content = (
       <HeaderContainer isHome={location.pathname === '/'}>
         <Header>
-          <div>
+          <ElementBeforeCanvas>
           <Image src={user.basics.picture} />
-          </div>
+          </ElementBeforeCanvas>
           <div>
             <h2>{user.basics.name}</h2>
             <h4>
@@ -36,7 +36,7 @@ const UserHeader = ({ user, init }) => {
             </p>
           </div>
         </Header>
-        <div>
+        <ElementBeforeCanvas>
           <ViewResumeLink
             href={`https://gitconnected.com/${user.basics.username}/resume`}
             target="_blank"
@@ -45,7 +45,7 @@ const UserHeader = ({ user, init }) => {
             <span>View Résumé</span>
             <ArrowRight16 />
           </ViewResumeLink>
-        </div>
+        </ElementBeforeCanvas>
       </HeaderContainer>
   );
   

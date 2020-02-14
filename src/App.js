@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div> 
-      {/* <Canvas /> */}
+      <Canvas />
       <Pages user={user} hobbies={hobbies} init={init} />
     </div>
   );

@@ -40,3 +40,8 @@ export function PortfolioSequencedSlideWrap(props) {
     </Slide>
   );
 }
+
+export const ElementBeforeCanvas = styled.div`
+  position: relative;
+  z-index: 3;
+`;
