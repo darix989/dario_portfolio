@@ -1,19 +1,44 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import { ArrowRight16 } from '@carbon/icons-react';
 import { HeaderContainer, Header, Image, ViewResumeLink } from './styles';
 import { PortfolioGrowWrap, ElementBeforeCanvas } from '../../styles';
+import {PoiContext, } from "../../PoiContext/PoiContext";
+import Grow from '@material-ui/core/Grow';
 
 const UserHeader = ({ user, init }) => {
   const location = useLocation();
+  const poiHandler = useContext(PoiContext);
+  const imageProfile = React.useRef(null);
+  const growEl = React.useRef(null);
+  let poiCommunicated = false;
+  
+  const setPOIAtTransitionEnd = (trEv) => {
+    if(poiCommunicated === false){
+      poiCommunicated = true;
+      let elemRect = imageProfile.current.getBoundingClientRect();
+      let xOffset = (elemRect.width / 3);
+      let yOffset = (elemRect.height / 3);
+      let newPoi = ({x: (elemRect.left+ xOffset), y: (elemRect.top + yOffset)})
+      // let newPoi = {x: (elemRect.left), y: (elemRect.top)};
+      poiHandler.setPoi(newPoi)
+      console.log('User Header > set next POI at ', newPoi);
+      // console.log("BOOM BITCHES", trEv);
+    }
+  }
 
   const content = (
+    
       <HeaderContainer isHome={location.pathname === '/'}>
         <Header>
           <ElementBeforeCanvas>
-          <Image src={user.basics.picture} />
+            <Image ref={imageProfile} src={user.basics.picture} />
           </ElementBeforeCanvas>
-          <div>
+          <div
+          // style={{background: colors.blue}}
+          >
+            {/* CANVAS 003 */}
+            {/* {poiHandler.getPoi().x} */}
             <h2>{user.basics.name}</h2>
             <h4>
               <a
@@ -47,6 +72,7 @@ const UserHeader = ({ user, init }) => {
           </ViewResumeLink>
         </ElementBeforeCanvas>
       </HeaderContainer>
+    
   );
   
   if(init){
@@ -54,9 +80,11 @@ const UserHeader = ({ user, init }) => {
       {content}
     </div>);
   } else {
-    return (<PortfolioGrowWrap>
-      {content}
-    </PortfolioGrowWrap>);
+    return (
+    <PortfolioGrowWrap onTransitionEnd={setPOIAtTransitionEnd}>
+    {content}
+    </PortfolioGrowWrap>
+    );
   }
   
 };

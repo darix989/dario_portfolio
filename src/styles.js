@@ -26,8 +26,15 @@ export const Pill = styled.span`
 `;
 
 export function PortfolioGrowWrap(props) {
+  
   return (
-    <Grow in={true} timeout={{enter: 1000}} >
+    <Grow in={true} timeout={{enter: 1000}}
+
+    addEndListener={(node, done) => {
+      // use the css transitionend event to mark the finish of a transition
+      node.addEventListener('transitionend', props.onTransitionEnd, false);
+    }}
+    >
       <div> {props.children} </div>
     </Grow>
   );
