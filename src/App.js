@@ -34,8 +34,8 @@ function App() {
     drawings: hobbiesDrawings
   }
   
-  // WIP
-  // const currentPoi = React.useRef({x: 50, y:50});
+  // CANVAS 006
+  // eval if use an array of poi {id, x, y}
   let currentPoi = {x: -1, y:-1};
   console.log("app render");
 
