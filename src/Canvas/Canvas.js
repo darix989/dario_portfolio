@@ -152,6 +152,7 @@ function Canvas (props) {
             bottom: 0,
             // backgroundColor: 'rgba(0,0,0,0.5)', /* Black background with opacity */
 
+            // CANVAS 005
             // set 2 in order to be behind images
             zIndex: 5, /* Specify a stack order in case you're using a different order for other elements */
 
