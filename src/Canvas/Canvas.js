@@ -1,33 +1,6 @@
 import React, {useContext} from 'react';
 import {PoiContext} from "../PoiContext/PoiContext";
-
-const useAnimationFrame = callback => {
-  // Use useRef for mutable variables that we want to persist
-  // without triggering a re-render on their change
-  const requestRef = React.useRef();
-  const previousTimeRef = React.useRef();
-  
-  const animate = time => {
-    if (previousTimeRef.current !== undefined) {
-      const deltaTime = time - previousTimeRef.current;
-      callback(deltaTime)
-    }
-    previousTimeRef.current = time;
-    requestRef.current = requestAnimationFrame(animate);
-  }
-  
-  React.useEffect(() => {
-    requestRef.current = requestAnimationFrame(animate);
-    return () => {
-      console.log("unmount use effect")
-      cancelAnimationFrame(requestRef.current)
-    };
-  }, []); // Make sure the effect runs only once
-}
-
-
-
-
+import {useAnimationFrame} from '../Hooks';
 
 function Canvas (props) {
 
@@ -35,23 +8,14 @@ function Canvas (props) {
 
   // THIS makes the component update and the loop is broken
   const poiHandler = useContext(PoiContext);
-
-  // if(canvasRef==null){
-  //   console.log("wow")
-  //   canvasRef = React.createRef(null);
-  // } else {
-  //   console.log("wAw")
-  // }
   
-  console.log("canvas comp init", poiHandler.getPoi());
-
-  const [count, setCount] = React.useState(0)
+  let ALPHA = 0.0;
   let GLOBAL_TARGET = {x: -1, y: -1};
+  let prev_pos = { x: -1, y: -1};
   let current_pos = { x: -1, y: -1};
   let LOCAL_TARGET = {x: -1, y: -1};
-  let wid = window.innerWidth;
-
-  console.log("LOCAL_TARGET ", LOCAL_TARGET);
+  
+  console.log('canvas render');
 
   // -------
   var sun = new Image();
@@ -59,51 +23,56 @@ function Canvas (props) {
   sun.src = 'https://i.ya-webdesign.com/images/navi-zelda-png-6.png';
   // -------
 
-  const myCircle = (newPos) => {
-    // console.log("my circle")
-    if(canvasRef.current!=null){
-      // console.log("my circle ref is ok")
-      var ctx = canvasRef.current.getContext("2d");
-
-      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-
-      // console.log("context is ", ctx);
-      // ctx.font = "30px Arial";
-      // ctx.fillStyle = "red";
-      // ctx.fillText("Hello World", newPos.x, newPos.y);
-      
-      ctx.shadowColor = "grey";
-      ctx.shadowBlur = 6;
-      ctx.shadowOffsetX = 3;
-      ctx.shadowOffsetY = 3;
-
-      // ctx.drawImage(sun, canvasRef.current.getBoundingClientRect().x + newPos.x, canvasRef.current.getBoundingClientRect().y + newPos.y, 60, 70);
-      ctx.drawImage(sun, newPos.x, newPos.y, 59, 71);
-    } else {
-      // console.log("my circle ref is null")
-    }
-  }
-
-  const calculateNextPosition = (currentPos, targetPos, deltaTime) => {
-
-    let dirVec = {x: (targetPos.x - currentPos.x), y: (targetPos.y - currentPos.y)};
-    let magn = Math.sqrt(dirVec.x * dirVec.x + dirVec.y * dirVec.y);
-
-    // console.log('magn ', magn);
-    if(magn > 2){
-      let normVec = {x: dirVec.x / magn, y: dirVec.y / magn};
-      return {x: currentPos.x + normVec.x * 0.05 * deltaTime, y: currentPos.y + normVec.y * 0.05 * deltaTime}
-    } else {
-      return currentPos;
-    }
-
-  }
-
   useAnimationFrame(deltaTime => {
     // Pass on a function to the setter of the state
     // to make sure we always have the latest state
-    // var newVal = (count + deltaTime * 0.01) % 100;
     // console.log("use anim")
+    
+    const myCircle = (prevPos, newPos) => {
+      // console.log("my circle")
+      if(canvasRef.current!=null){
+        // console.log("my circle ref is ok")
+        var ctx = canvasRef.current.getContext("2d");
+  
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  
+        // console.log("context is ", ctx);
+        // ctx.font = "30px Arial";
+        // ctx.fillStyle = "red";
+        // ctx.fillText("Hello World", newPos.x, newPos.y);
+        
+        if(prevPos.x === newPos.x && prevPos.y === newPos.y){
+
+        } else {
+          ctx.shadowColor = "grey";
+          ctx.shadowBlur = 6;
+          ctx.shadowOffsetX = 3;
+          ctx.shadowOffsetY = 3;
+          ctx.globalAlpha = Math.min(Math.max(ALPHA, 0), 1);
+          
+          // ctx.drawImage(sun, canvasRef.current.getBoundingClientRect().x + newPos.x, canvasRef.current.getBoundingClientRect().y + newPos.y, 60, 70);
+          ctx.drawImage(sun, newPos.x, newPos.y, 59, 71);
+        }
+      } else {
+        // console.log("my circle ref is null")
+      }
+    }
+  
+    const calculateNextPosition = (currentPos, targetPos, deltaTime) => {
+  
+      let dirVec = {x: (targetPos.x - currentPos.x), y: (targetPos.y - currentPos.y)};
+      let magn = Math.sqrt(dirVec.x * dirVec.x + dirVec.y * dirVec.y);
+  
+      // console.log('magn ', magn);
+      if(magn > 2){
+        let normVec = {x: dirVec.x / magn, y: dirVec.y / magn};
+        return {x: currentPos.x + normVec.x * 0.05 * deltaTime, y: currentPos.y + normVec.y * 0.05 * deltaTime}
+      } else {
+        return currentPos;
+      }
+  
+    }
+
     if(canvasRef.current !== null)
     {
       canvasRef.current.style.width ='100%';
@@ -114,27 +83,27 @@ function Canvas (props) {
       // console.log("poiHandler", poiHandler)
       let appDestinationPoi = poiHandler.getPoi();
       if(GLOBAL_TARGET.x !== appDestinationPoi.x || GLOBAL_TARGET.y !== appDestinationPoi.y){
-        console.log(">GLOBAL_TARGET", appDestinationPoi);
+        // console.log(">GLOBAL_TARGET", appDestinationPoi);
+        ALPHA = -0.5;
         GLOBAL_TARGET = {x: appDestinationPoi.x, y: appDestinationPoi.y}
         let transformedDestinationPoi = {x: (appDestinationPoi.x - canvasRef.current.getBoundingClientRect().x), y: (appDestinationPoi.y - canvasRef.current.getBoundingClientRect().y) }
         LOCAL_TARGET = {x: transformedDestinationPoi.x, y: transformedDestinationPoi.y};
-        console.log(">LOCAL_TARGET", LOCAL_TARGET);
-        if(current_pos.x===-1 && current_pos.y===-1){
-          // current_pos = LOCAL_TARGET;
-          current_pos = {x: 0, y:0};
-          console.log(">INIT CURRENT_POS", current_pos);
-        }
+        // console.log(">LOCAL_TARGET", LOCAL_TARGET);
+        // if(current_pos.x===-1 && current_pos.y===-1){
+        //   // current_pos = LOCAL_TARGET;
+        //   current_pos = {x: 0, y:0};
+        //   // console.log(">INIT CURRENT_POS", current_pos);
+        // }
       }
 
-      // current_pos = calculateNextPosition(current_pos, LOCAL_TARGET, deltaTime);
-      current_pos = LOCAL_TARGET;
-
-      // LOCAL_TARGET.x = (LOCAL_TARGET.x + deltaTime * 0.05) % (canvasRef.current.width);
+      ALPHA = Math.min(Math.max(ALPHA + 0.01 , -0.5), 1);
+      // console.log('ALPHA', ALPHA)
+      prev_pos = {x: current_pos.x, y: current_pos.y};
+      current_pos = calculateNextPosition(current_pos, LOCAL_TARGET, deltaTime);
+      // current_pos = LOCAL_TARGET;
     }
-    // console.log("LOCAL_TARGET is", LOCAL_TARGET)
-    // setCount(newVal);
-    myCircle(current_pos);
-  })
+    myCircle(prev_pos, current_pos);
+  }, [props.currentScrollY])
 
   return (
       <div id="overlay"
@@ -154,7 +123,7 @@ function Canvas (props) {
 
             // CANVAS 005
             // set 2 in order to be behind images
-            zIndex: 5, /* Specify a stack order in case you're using a different order for other elements */
+            zIndex: 2, /* Specify a stack order in case you're using a different order for other elements */
 
             // cursor: 'pointer', /* Add a pointer on hover */
             pointerEvents: 'none',
@@ -167,4 +136,4 @@ function Canvas (props) {
 };
 
 // prevent weird behavior after react changes of state
-export default React.memo(Canvas);
+export default Canvas;

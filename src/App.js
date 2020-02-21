@@ -3,6 +3,7 @@ import Pages from './pages';
 import Canvas from './Canvas';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import {PoiContext} from "./PoiContext/PoiContext";
+import {useScrollPosition} from './Hooks'
 
 function LoadingPage() {
 
@@ -37,11 +38,29 @@ function App() {
   // CANVAS 006
   // eval if use an array of poi {id, x, y}
   let currentPoi = {x: -1, y:-1};
-  console.log("app render");
+  // console.log("app render");
 
-  const onScrollPage = (e) => {
-    console.log("scrolling main page");
-  }
+  // -----------------------------------
+  // old style way to check scroll
+  // const onScrollPage = (e) => {
+  //   console.log("scrolling main page");
+  // }
+
+  // -----------------------------------
+  // UNCOMMENT TO CHECK IF WE USE EXTRA RE-RENDERS
+  // setTimeout( () => {
+  //   setInit(!init);
+  // }, 2000);
+
+  // useEffect( (user) => {
+  //   console.log('bomba');
+  // }, [currentScrollPos.current]);
+  // -----------------------------------
+
+  useScrollPosition(({prevPos, currPos}) => {
+    // console.log('currPos.y ', Math.abs(currPos.y), ' val ', currentScrollPos);
+
+  }, [])
 
   useEffect(() => {
     // NOTE: Use your username below
@@ -52,7 +71,7 @@ function App() {
         // CANVAS 004
         setTimeout(() => {
           // used for doing one shot animation of the UserHeader
-          setInit(true);
+          // setInit(true);
         }, 1000);
       });
   }, []);
@@ -62,7 +81,6 @@ function App() {
   }
 
   return (
-    // <PoiSetterContext.Provider value={ (val) => {console.log("currentPOi updated", val); currentPoi = val} }>
       <PoiContext.Provider 
         value={
           {
@@ -72,14 +90,13 @@ function App() {
         }
         >
         <div
-          onWheel = {(e) => onScrollPage(e)}
+          // onWheel = {(e) => onScrollPage(e)}
           >
             {/* CANVAS 002 */}
-            {/* <Canvas/> */}
+            <Canvas />
             <Pages user={user} hobbies={hobbies} init={init} />
         </div>
       </PoiContext.Provider>
-    // </PoiSetterContext.Provider>
   );
 }
 

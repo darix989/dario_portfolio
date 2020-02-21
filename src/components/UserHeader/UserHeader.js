@@ -1,22 +1,22 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import { useLocation } from 'react-router-dom';
 import { ArrowRight16 } from '@carbon/icons-react';
 import { HeaderContainer, Header, Image, ViewResumeLink } from './styles';
 import { PortfolioGrowWrap, ElementBeforeCanvas } from '../../styles';
 import {PoiContext, } from "../../PoiContext/PoiContext";
-import Grow from '@material-ui/core/Grow';
 
 const UserHeader = ({ user, init }) => {
   const location = useLocation();
   const poiHandler = useContext(PoiContext);
   const imageProfile = React.useRef(null);
-  const growEl = React.useRef(null);
+  const viewResume = React.useRef(null);
   let poiCommunicated = false;
   
   const setPOIAtTransitionEnd = (trEv) => {
     if(poiCommunicated === false){
       poiCommunicated = true;
-      let elemRect = imageProfile.current.getBoundingClientRect();
+      let elem = Math.random() > 0.5 ? imageProfile : viewResume;
+      let elemRect = elem.current.getBoundingClientRect();
       let xOffset = (elemRect.width / 3);
       let yOffset = (elemRect.height / 3);
       let newPoi = ({x: (elemRect.left+ xOffset), y: (elemRect.top + yOffset)})
@@ -63,6 +63,7 @@ const UserHeader = ({ user, init }) => {
         </Header>
         <ElementBeforeCanvas>
           <ViewResumeLink
+            ref={viewResume}
             href={`https://gitconnected.com/${user.basics.username}/resume`}
             target="_blank"
             rel="noopener noreferrer"
